@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Inmobiliario</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏠 Gestión de Propiedades</h1>
+            <p>Sistema integral para tu negocio inmobiliario</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="showTab('nuevo')">Nueva Propiedad</button>
+            <button class="tab-btn" onclick="showTab('inventario')">Inventario</button>
+            <button class="tab-btn" onclick="showTab('clientes')">Clientes</button>
+        </nav>
+
+        <!-- TAB 1: NUEVA PROPIEDAD -->
+        <section id="nuevo" class="tab-content active">
+            <h2>Registrar Nueva Propiedad</h2>
+            <form id="formPropiedad" class="form-grid">
+                
+                <div class="form-group">
+                    <label>Precio ($)</label>
+                    <input type="number" name="precio" placeholder="250000" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de operación</label>
+                    <select name="tipo_operacion" required>
+                        <option value="">Selecciona...</option>
+                        <option value="venta">Venta</option>
+                        <option value="renta">Renta</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Propietario (nombre)</label>
+                    <input type="text" name="propietario_nombre" placeholder="Juan García" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Teléfono propietario</label>
+                    <input type="tel" name="propietario_telefono" placeholder="228-1234567">
+                </div>
+
+                <div class="form-group">
+                    <label>Email propietario</label>
+                    <input type="email" name="propietario_email" placeholder="juan@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de inmueble</label>
+                    <select name="tipo_inmueble" required>
+                        <option value="">Selecciona...</option>
+                        <option value="casa">Casa</option>
+                        <option value="depto">Departamento</option>
+                        <option value="local">Local comercial</option>
+                        <option value="terreno">Terreno</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>m² de terreno</label>
+                    <input type="number" name="m2_terreno" placeholder="500" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label>m² de construcción</label>
+                    <input type="number" name="m2_construccion" placeholder="350" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label>Dirección</label>
+                    <input type="text" name="ubicacion_direccion" placeholder="Calle Principal 123" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Ciudad</label>
+                    <input type="text" name="ubicacion_ciudad" placeholder="Xalapa" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Estado</label>
+                    <input type="text" name="ubicacion_estado" placeholder="Veracruz" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Descripción breve</label>
+                    <textarea name="descripcion_breve" placeholder="Descripción de 2-3 líneas" rows="2"></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Descripción completa</label>
+                    <textarea name="descripcion_completa" placeholder="Detalles, amenidades, etc." rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Cuartos</label>
+                    <input type="number" name="cuartos" placeholder="3">
+                </div>
+
+                <div class="form-group">
+                    <label>Baños</label>
+                    <input type="number" name="banos" placeholder="2">
+                </div>
+
+                <div class="form-group">
+                    <label>Estacionamientos</label>
+                    <input type="number" name="estacionamientos" placeholder="1">
+                </div>
+
+                <button type="submit" class="btn-primary full-width">Guardar Propiedad</button>
+            </form>
+        </section>
+
+        <!-- TAB 2: INVENTARIO -->
+        <section id="inventario" class="tab-content">
+            <h2>Inventario de Propiedades</h2>
+            <div id="propiedadesList" class="propiedades-grid">
+                <!-- Se llena con JavaScript -->
+            </div>
+        </section>
+
+  <section id="clientes" class="tab-content">
+    <h2>Gestión de Clientes</h2>
+    <form id="formCliente" class="form-grid">
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" name="nombre" placeholder="Nombre del cliente" required>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="cliente@example.com">
+        </div>
+        <div class="form-group">
+            <label>Teléfono</label>
+            <input type="tel" name="telefono" placeholder="228-1234567">
+        </div>
+        <div class="form-group">
+            <label>WhatsApp</label>
+            <input type="tel" name="whatsapp" placeholder="228-9876543">
+        </div>
+        <div class="form-group">
+            <label>Presupuesto estimado ($)</label>
+            <input type="number" name="presupuesto_estimado" placeholder="250000" step="0.01">
+        </div>
+        <div class="form-group">
+            <label>Tipo de propiedad buscada</label>
+            <select name="tipo_inmueble_buscado">
+                <option value="">Selecciona...</option>
+                <option value="casa">Casa</option>
+                <option value="depto">Departamento</option>
+                <option value="local">Local comercial</option>
+                <option value="terreno">Terreno</option>
+                <option value="otro">Otro</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Interesado en (Renta o Venta)</label>
+            <select name="tipo_operacion_buscada">
+                <option value="">Selecciona...</option>
+                <option value="venta">Venta</option>
+                <option value="renta">Renta</option>
+                <option value="ambos">Ambos</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Origen</label>
+            <select name="origen_contacto">
+                <option value="">Selecciona...</option>
+                <option value="meta_ads">Meta Ads</option>
+                <option value="referencia">Referencia</option>
+                <option value="llamada_directa">Llamada directa</option>
+                <option value="otro">Otro</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-primary full-width">Agregar Cliente</button>
+    </form>
+    <div id="clientesList" class="clientes-list">
+        <!-- Se llena con JavaScript -->
+    </div>
+</section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
