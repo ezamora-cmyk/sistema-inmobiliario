@@ -114,17 +114,22 @@ async function cargarClientes() {
             return;
         }
 
-        card.innerHTML = `
-    <h3>${cliente.nombre}</h3>
-    <p>📧 ${cliente.email || 'N/A'}</p>
-    <p>📱 ${cliente.telefono || 'N/A'}</p>
-    <p>💬 ${cliente.whatsapp ? `WhatsApp: ${cliente.whatsapp}` : 'Sin WhatsApp'}</p>
-    <p><strong>Presupuesto:</strong> $${cliente.presupuesto_estimado ? parseFloat(cliente.presupuesto_estimado).toLocaleString('es-MX') : 'N/A'}</p>
-    <p><strong>Tipo inmueble:</strong> ${cliente.tipo_inmueble_buscado || 'N/A'}</p>
-    <p><strong>Tipo operación:</strong> ${cliente.tipo_operacion_buscada || 'N/A'}</p>
-    <p><strong>Origen:</strong> ${cliente.origen_contacto || 'N/A'}</p>
-    <p><strong>Estado:</strong> <span style="background: #667eea; color: white; padding: 2px 8px; border-radius: 4px;">${cliente.estado}</span></p>
-`;
+        clientes.forEach(cliente => {
+            const card = document.createElement('div');
+            card.className = 'cliente-card';
+            card.innerHTML = `
+                <h3>${cliente.nombre}</h3>
+                <p>📧 ${cliente.email || 'N/A'}</p>
+                <p>📱 ${cliente.telefono || 'N/A'}</p>
+                <p>💬 ${cliente.whatsapp ? `WhatsApp: ${cliente.whatsapp}` : 'Sin WhatsApp'}</p>
+                <p><strong>Presupuesto:</strong> $${cliente.presupuesto_estimado ? parseFloat(cliente.presupuesto_estimado).toLocaleString('es-MX') : 'N/A'}</p>
+                <p><strong>Tipo inmueble:</strong> ${cliente.tipo_inmueble_buscado || 'N/A'}</p>
+                <p><strong>Tipo operación:</strong> ${cliente.tipo_operacion_buscada || 'N/A'}</p>
+                <p><strong>Origen:</strong> ${cliente.origen_contacto || 'N/A'}</p>
+                <p><strong>Estado:</strong> <span style="background: #667eea; color: white; padding: 2px 8px; border-radius: 4px;">${cliente.estado}</span></p>
+            `;
+            container.appendChild(card);
+        });
     } catch (error) {
         mostrarMensaje(`Error: ${error.message}`, 'error');
     }
