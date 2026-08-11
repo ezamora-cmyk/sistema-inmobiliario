@@ -1,6 +1,5 @@
-const API_URL = process.env.REACT_APP_API_URL || 'https://sistema-inmobiliario-api.onrender.com/api';
+const API_URL = 'https://sistema-inmobiliario-api.onrender.com/api';
 
-// Utilidades
 function showTab(tabName) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -18,10 +17,6 @@ function mostrarMensaje(mensaje, tipo = 'exito') {
     document.body.insertBefore(div, document.body.firstChild);
     setTimeout(() => div.remove(), 4000);
 }
-
-// ==================
-// PROPIEDADES
-// ==================
 
 document.getElementById('formPropiedad').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -57,25 +52,13 @@ async function cargarPropiedades() {
         propiedades.forEach(prop => {
             const card = document.createElement('div');
             card.className = 'propiedad-card';
-            card.innerHTML = `
-                <h3>${prop.tipo_inmueble.toUpperCase()}</h3>
-                <p><strong>Ubicación:</strong> ${prop.ubicacion_direccion}, ${prop.ubicacion_ciudad}</p>
-                <p><strong>Propietario:</strong> ${prop.propietario_nombre}</p>
-                <p><strong>m² construcción:</strong> ${prop.m2_construccion || 'N/A'}</p>
-                <p><strong>Tipo:</strong> ${prop.tipo_operacion === 'venta' ? 'VENTA' : 'RENTA'}</p>
-                <div class="precio">$${parseFloat(prop.precio).toLocaleString('es-MX')}</div>
-                <span class="badge">${prop.estado_propiedad}</span>
-            `;
+            card.innerHTML = `<h3>${prop.tipo_inmueble.toUpperCase()}</h3><p><strong>Ubicación:</strong> ${prop.ubicacion_direccion}, ${prop.ubicacion_ciudad}</p><p><strong>Propietario:</strong> ${prop.propietario_nombre}</p><p><strong>m² construcción:</strong> ${prop.m2_construccion || 'N/A'}</p><p><strong>Tipo:</strong> ${prop.tipo_operacion === 'venta' ? 'VENTA' : 'RENTA'}</p><div class="precio">$${parseFloat(prop.precio).toLocaleString('es-MX')}</div><span class="badge">${prop.estado_propiedad}</span>`;
             container.appendChild(card);
         });
     } catch (error) {
         mostrarMensaje(`Error: ${error.message}`, 'error');
     }
 }
-
-// ==================
-// CLIENTES
-// ==================
 
 document.getElementById('formCliente').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -117,17 +100,7 @@ async function cargarClientes() {
         clientes.forEach(cliente => {
             const card = document.createElement('div');
             card.className = 'cliente-card';
-            card.innerHTML = `
-                <h3>${cliente.nombre}</h3>
-                <p>📧 ${cliente.email || 'N/A'}</p>
-                <p>📱 ${cliente.telefono || 'N/A'}</p>
-                <p>💬 ${cliente.whatsapp ? `WhatsApp: ${cliente.whatsapp}` : 'Sin WhatsApp'}</p>
-                <p><strong>Presupuesto:</strong> $${cliente.presupuesto_estimado ? parseFloat(cliente.presupuesto_estimado).toLocaleString('es-MX') : 'N/A'}</p>
-                <p><strong>Tipo inmueble:</strong> ${cliente.tipo_inmueble_buscado || 'N/A'}</p>
-                <p><strong>Tipo operación:</strong> ${cliente.tipo_operacion_buscada || 'N/A'}</p>
-                <p><strong>Origen:</strong> ${cliente.origen_contacto || 'N/A'}</p>
-                <p><strong>Estado:</strong> <span style="background: #667eea; color: white; padding: 2px 8px; border-radius: 4px;">${cliente.estado}</span></p>
-            `;
+            card.innerHTML = `<h3>${cliente.nombre}</h3><p>📧 ${cliente.email || 'N/A'}</p><p>📱 ${cliente.telefono || 'N/A'}</p><p>💬 ${cliente.whatsapp ? 'WhatsApp: ' + cliente.whatsapp : 'Sin WhatsApp'}</p><p><strong>Presupuesto:</strong> $${cliente.presupuesto_estimado ? parseFloat(cliente.presupuesto_estimado).toLocaleString('es-MX') : 'N/A'}</p><p><strong>Tipo inmueble:</strong> ${cliente.tipo_inmueble_buscado || 'N/A'}</p><p><strong>Tipo operación:</strong> ${cliente.tipo_operacion_buscada || 'N/A'}</p><p><strong>Origen:</strong> ${cliente.origen_contacto || 'N/A'}</p><p><strong>Estado:</strong> <span style="background: #667eea; color: white; padding: 2px 8px; border-radius: 4px;">${cliente.estado}</span></p>`;
             container.appendChild(card);
         });
     } catch (error) {
