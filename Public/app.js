@@ -101,5 +101,25 @@ window.onload = function() {
                 container.appendChild(card);
             });
         });
-    }
+    }window.submitCliente = function() {
+        var formCliente = document.getElementById('formCliente');
+        var formData = new FormData(formCliente);
+        var data = {};
+        formData.forEach(function(value, key) { data[key] = value; });
+        fetch(API_URL + '/clientes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(function(response) {
+            if (response.ok) {
+                mostrarMensaje('Cliente agregado', 'exito');
+                formCliente.reset();
+                cargarClientes();
+            } else {
+                mostrarMensaje('Error al agregar', 'error');
+            }
+        }).catch(function(error) {
+            mostrarMensaje('Error: ' + error.message, 'error');
+        });
+    };
 };
