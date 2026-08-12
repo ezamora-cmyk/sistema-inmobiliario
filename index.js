@@ -160,21 +160,18 @@ app.get('/api/clientes', (req, res) => {
     });
 });
 
-// POST: Crear cliente
-app.post('/api/clientes', (req, res) => {
-    const { nombre, email, telefono, whatsapp, tipo_cliente, presupuesto_estimado, origen_contacto } = req.body;
-    
-    db.run(`
+db.run(`
     CREATE TABLE IF NOT EXISTS clientes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nombre TEXT NOT NULL,
         email TEXT,
         telefono TEXT,
         whatsapp TEXT,
+        tipo_cliente TEXT,
         presupuesto_estimado REAL,
+        zona_interes TEXT,
         tipo_inmueble_buscado TEXT,
         tipo_operacion_buscada TEXT,
-        zona_interes TEXT,
         fecha_primer_contacto DATETIME DEFAULT CURRENT_TIMESTAMP,
         origen_contacto TEXT,
         estado TEXT DEFAULT 'prospecto',
