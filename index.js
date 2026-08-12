@@ -211,7 +211,10 @@ app.post('/api/clientes', (req, res) => {
          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
         [nombre, email, telefono, whatsapp, presupuesto_estimado, tipo_inmueble_buscado, tipo_operacion_buscada, origen_contacto],
         function(err) {
-            if (err) return res.status(500).json({ error: err.message });
+            if (err) {
+                console.error('Error inserting cliente:', err);
+                return res.status(500).json({ error: err.message });
+            }
             res.status(201).json({ id: this.lastID, message: 'Cliente creado' });
         }
     );
