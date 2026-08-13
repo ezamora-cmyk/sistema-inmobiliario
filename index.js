@@ -15,31 +15,26 @@ const db = new sqlite3.Database('inmobiliario.db');
 db.serialize(() => {
     // Propiedades
     db.run(`
-        CREATE TABLE IF NOT EXISTS propiedades (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            precio REAL NOT NULL,
-            tipo_operacion TEXT NOT NULL,
-            propietario_nombre TEXT NOT NULL,
-            propietario_telefono TEXT,
-            propietario_email TEXT,
-            tipo_inmueble TEXT NOT NULL,
-            m2_terreno REAL,
-            m2_construccion REAL,
-            ubicacion_direccion TEXT NOT NULL,
-            ubicacion_ciudad TEXT,
-            ubicacion_estado TEXT,
-            descripcion_breve TEXT,
-            descripcion_completa TEXT,
-            estado_propiedad TEXT DEFAULT 'disponible',
-            fecha_ingreso DATETIME DEFAULT CURRENT_TIMESTAMP,
-            fecha_actualizacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-            imagen_principal_url TEXT,
-            cuartos INTEGER,
-            banos INTEGER,
-            estacionamientos INTEGER,
-            activo BOOLEAN DEFAULT 1
-        )
-    `);
+        db.run(`DROP TABLE IF EXISTS clientes`);
+
+db.run(`
+    CREATE TABLE IF NOT EXISTS clientes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT NOT NULL,
+        email TEXT,
+        telefono TEXT,
+        whatsapp TEXT,
+        tipo_cliente TEXT,
+        presupuesto_estimado REAL,
+        zona_interes TEXT,
+        tipo_inmueble_buscado TEXT,
+        tipo_operacion_buscada TEXT,
+        fecha_primer_contacto DATETIME DEFAULT CURRENT_TIMESTAMP,
+        origen_contacto TEXT,
+        estado TEXT DEFAULT 'prospecto',
+        notas TEXT
+    )
+`);
 
     // Clientes
     db.run(`
