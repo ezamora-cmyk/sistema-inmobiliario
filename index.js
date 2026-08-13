@@ -178,7 +178,7 @@ db.run(`
         notas TEXT
     )
 `);
-});
+
 
 // ==================
 // RUTAS CONSULTAS
