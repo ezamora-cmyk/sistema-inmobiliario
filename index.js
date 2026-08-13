@@ -15,28 +15,33 @@ const db = new sqlite3.Database('inmobiliario.db');
 db.serialize(() => {
     // Propiedades
     db.run(`
-        db.run(`DROP TABLE IF EXISTS clientes`);
+        CREATE TABLE IF NOT EXISTS propiedades (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            precio REAL NOT NULL,
+            tipo_operacion TEXT NOT NULL,
+            propietario_nombre TEXT NOT NULL,
+            propietario_telefono TEXT,
+            propietario_email TEXT,
+            tipo_inmueble TEXT NOT NULL,
+            m2_terreno REAL,
+            m2_construccion REAL,
+            ubicacion_direccion TEXT NOT NULL,
+            ubicacion_ciudad TEXT NOT NULL,
+            ubicacion_estado TEXT NOT NULL,
+            descripcion_breve TEXT,
+            descripcion_completa TEXT,
+            cuartos INTEGER,
+            banos INTEGER,
+            estacionamientos INTEGER,
+            estado_propiedad TEXT DEFAULT 'disponible',
+            activo BOOLEAN DEFAULT 1,
+            fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    `);
 
-db.run(`
-    CREATE TABLE IF NOT EXISTS clientes (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre TEXT NOT NULL,
-        email TEXT,
-        telefono TEXT,
-        whatsapp TEXT,
-        tipo_cliente TEXT,
-        presupuesto_estimado REAL,
-        zona_interes TEXT,
-        tipo_inmueble_buscado TEXT,
-        tipo_operacion_buscada TEXT,
-        fecha_primer_contacto DATETIME DEFAULT CURRENT_TIMESTAMP,
-        origen_contacto TEXT,
-        estado TEXT DEFAULT 'prospecto',
-        notas TEXT
-    )
-`);
+    // Clientes - DROP y recrear
+    db.run(`DROP TABLE IF EXISTS clientes`);
 
-    // Clientes
     db.run(`
         CREATE TABLE IF NOT EXISTS clientes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,6 +52,8 @@ db.run(`
             tipo_cliente TEXT,
             presupuesto_estimado REAL,
             zona_interes TEXT,
+            tipo_inmueble_buscado TEXT,
+            tipo_operacion_buscada TEXT,
             fecha_primer_contacto DATETIME DEFAULT CURRENT_TIMESTAMP,
             origen_contacto TEXT,
             estado TEXT DEFAULT 'prospecto',
@@ -60,11 +67,10 @@ db.run(`
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             cliente_id INTEGER,
             propiedad_id INTEGER,
-            fecha_consulta DATETIME DEFAULT CURRENT_TIMESTAMP,
             tipo_consulta TEXT,
-            respuesta_enviada BOOLEAN DEFAULT 0,
-            estado_seguimiento TEXT DEFAULT 'pendiente',
-            notas TEXT,
+            respuesta_enviada TEXT,
+            estado_seguimiento TEXT,
+            fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (cliente_id) REFERENCES clientes(id),
             FOREIGN KEY (propiedad_id) REFERENCES propiedades(id)
         )
