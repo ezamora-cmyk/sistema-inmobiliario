@@ -115,6 +115,18 @@
                     <input type="number" name="estacionamientos" placeholder="1">
                 </div>
 
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="tiene_jardin"> ¿Tiene jardín?
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="tiene_recamara_bano_planta_baja"> ¿Recámara con baño en planta baja?
+                    </label>
+                </div>
+
                 <button type="submit" class="btn-primary full-width">Guardar Propiedad</button>
             </form>
         </section>
@@ -122,6 +134,60 @@
         <!-- TAB 2: INVENTARIO -->
         <section id="inventario" class="tab-content">
             <h2>Inventario de Propiedades</h2>
+
+            <div class="filtros-container">
+                <h3>Filtros</h3>
+                <div class="filtros-grid">
+                    <div class="form-group">
+                        <label>Cuartos mínimo</label>
+                        <input type="number" id="filtro_cuartos_min" placeholder="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Baños mínimo</label>
+                        <input type="number" id="filtro_banos_min" placeholder="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Precio mínimo ($)</label>
+                        <input type="number" id="filtro_precio_min" placeholder="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Precio máximo ($)</label>
+                        <input type="number" id="filtro_precio_max" placeholder="999999999" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de operación</label>
+                        <select id="filtro_tipo_operacion">
+                            <option value="">Todos</option>
+                            <option value="venta">Venta</option>
+                            <option value="renta">Renta</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de inmueble</label>
+                        <select id="filtro_tipo_inmueble">
+                            <option value="">Todos</option>
+                            <option value="casa">Casa</option>
+                            <option value="depto">Departamento</option>
+                            <option value="local">Local comercial</option>
+                            <option value="terreno">Terreno</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="filtro_jardin"> Tiene jardín
+                        </label>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="filtro_recamara_bano"> Recámara con baño en planta baja
+                        </label>
+                    </div>
+                </div>
+                <button onclick="aplicarFiltros()" class="btn-primary">Aplicar Filtros</button>
+                <button onclick="limpiarFiltros()" class="btn-secondary">Limpiar</button>
+            </div>
+
             <div id="propiedadesList" class="propiedades-grid">
                 <!-- Se llena con JavaScript -->
             </div>
