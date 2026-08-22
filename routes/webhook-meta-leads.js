@@ -1,3 +1,4 @@
+// Validación del webhook de Meta
 /**
  * WEBHOOK META LEADS + AGENTE IA AUTOMÁTICO
  * Coloca este código en tu backend (Express)
