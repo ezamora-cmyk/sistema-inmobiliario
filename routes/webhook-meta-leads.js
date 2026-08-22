@@ -192,7 +192,7 @@ async function responderALeadAutomaticamente(lead, clienteId) {
 
 async function generarRespuestaConClaude(lead) {
   const prompt = `
-Sos un agente inmobiliario profesional de BuscaProp Xalapa.
+Soy el asistente virtual de Anahí López, tu asesora inmobiliaria profesional de 3 Raíces.
 
 CLIENTE:
 - Nombre: ${lead.nombre || 'Cliente'}
