@@ -284,7 +284,7 @@ app.post('/api/clientes', (req, res) => {
 // ==================
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
     console.log(`📡 API disponible en http://localhost:${PORT}/api/propiedades`);
 });
